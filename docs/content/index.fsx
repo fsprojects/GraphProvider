@@ -7,8 +7,6 @@ GraphProvider
 
 The GraphProvider project implements a state machine type provider..
 
-* [CommonFolders](CommonFolders.html)
-
 <div class="row">
   <div class="span1"></div>
   <div class="span6">
