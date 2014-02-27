@@ -52,7 +52,7 @@ Turnstile.StartFromLocked().Coin()
 
 (**
 
-Findind shortest paths
+Finding shortest paths
 ----------------------
 
 Consider the following DGML file:
