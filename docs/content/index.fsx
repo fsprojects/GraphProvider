@@ -49,6 +49,23 @@ Turnstile.StartFromLocked()
 // Insert a coin and the turnstile is unlocked
 Turnstile.StartFromLocked().Coin()
 // [fsi:val it : Graph<...>.Unlocked2 = {Name = "Unlocked";}]
+
+(**
+
+Findind shortest paths
+----------------------
+
+Consider the following DGML file:
+![alt text](img/Actors.png "Actors")
+
+*)
+
+type Actors = Graph<"Actors.dgml">
+
+// find the shortest path between Keanu Reeves and Kevin Bacon
+Actors.StartFromKeanuReeves().ShortestPathToKevinBacon()
+// [fsi:val it : List<string> = ["The Matrix"; "Laurence Fishburne"; "Mystic River"]]
+
 (**
 
 Contributing and copyright
