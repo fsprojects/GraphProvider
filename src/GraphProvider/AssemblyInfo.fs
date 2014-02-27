@@ -1,12 +1,12 @@
-namespace System
+﻿namespace System
 open System.Reflection
 
 [<assembly: AssemblyTitleAttribute("GraphProvider")>]
 [<assembly: AssemblyProductAttribute("GraphProvider")>]
-[<assembly: AssemblyDescriptionAttribute("Various type providers for management of the machine.")>]
-[<assembly: AssemblyVersionAttribute("0.1.0")>]
-[<assembly: AssemblyFileVersionAttribute("0.1.0")>]
+[<assembly: AssemblyDescriptionAttribute("This library is for the .NET platform implementing a state machine type provider.")>]
+[<assembly: AssemblyVersionAttribute("0.0.1")>]
+[<assembly: AssemblyFileVersionAttribute("0.0.1")>]
 do ()
 
 module internal AssemblyVersionInformation =
-    let [<Literal>] Version = "0.1.0"
+    let [<Literal>] Version = "0.0.1"
