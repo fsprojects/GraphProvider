@@ -54,6 +54,7 @@ Finding shortest paths
 ----------------------
 
 Consider the following DGML file:
+
 ![alt text](img/Actors.png "Actors")
 
 *)
