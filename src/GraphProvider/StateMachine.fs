@@ -137,17 +137,48 @@ type StateMachine(makeAsync) as this =
 
     // FindPath - Slow version
     member this.FindShortestPathTo(startNode,targetNode) = 
-        let rec findShortestPath path (visitedNodes: Set<string>) (currentNode:string) =            
-            let paths =
-                let currentNode = (this.FindNode currentNode).Value
-                currentNode.NextNodes
-                |> List.choose (fun (_,node) ->
-                    if node.Name = targetNode then Some path else
-                    if visitedNodes |> Set.contains node.Name then None else                    
-                    findShortestPath (node.Name::path) (visitedNodes |> Set.add node.Name) node.Name)
-            if paths = [] then None else Some (paths |> List.minBy (fun path -> List.length path))
-        
-        findShortestPath [startNode] (Set.singleton startNode) startNode
+        let findIndex name = this.Nodes |> Seq.findIndex (fun x -> x.Name = name)
+
+        let dist = 
+            this.Nodes
+            |> Seq.map (fun x -> (System.Int32.MaxValue, x))
+            |> Array.ofSeq
+
+        let prev = Array.create (this.Nodes.Length) Option<Node>.None
+        let startIndex = findIndex startNode
+        dist.[startIndex] <- (0, dist.[startIndex] |> snd)
+
+        let rec processNode visitedNodes = 
+            let (act, u) = 
+                dist
+                |> Seq.filter (fun x -> 
+                       visitedNodes
+                       |> Seq.tryFind ((=) (snd x))
+                       |> Option.isNone)
+                |> Seq.minBy fst
+            if u.Name = targetNode then 
+                let rec path (node : Node) = 
+                    let index = findIndex node.Name
+                    match prev.[index] with
+                    | Some n -> n.Name :: path n
+                    | None -> []
+            
+                match path u with
+                | [] -> None
+                | x -> Some x
+            else 
+                let uIndex = findIndex u.Name
+                let neighbors = u.NextNodes |> Seq.map snd
+                let alt = act + 1
+                for n in neighbors do
+                    let nIndex = findIndex n.Name
+                    let curDist = dist.[nIndex] |> fst
+                    if alt < curDist then 
+                        dist.[nIndex] <- (alt, dist.[nIndex] |> snd)
+                        prev.[nIndex] <- Some this.Nodes.[uIndex]
+                processNode (u :: visitedNodes)
+
+        processNode []
 
     // set the transition function
     member this.SetFunction(name:string, state:IState) = 
