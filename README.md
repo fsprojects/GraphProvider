@@ -1,4 +1,8 @@
-GraphProvider
+[![Issue Stats](http://issuestats.com/github/fsprojects/GraphProvider/badge/issue)](http://issuestats.com/github/fsprojects/GraphProvider)
+[![Issue Stats](http://issuestats.com/github/fsprojects/GraphProvider/badge/pr)](http://issuestats.com/github/fsprojects/GraphProvider)
+
+
+GraphProvider [![NuGet Status](http://img.shields.io/nuget/v/GraphProvider.svg?style=flat)](https://www.nuget.org/packages/GraphProvider/)
 ===========================
 
 The GraphProvider project contains a state machine type provider.
